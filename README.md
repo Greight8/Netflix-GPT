@@ -17,6 +17,6 @@
            - Movie Sugesstions
                 - MovieLists * N  ( with vertical scrollbar)
 
-    - NetflixGPT
-           - Search Bar
-           - Movie Sudesstions            
+- NetflixGPT
+        - Search Bar
+        - Movie Sugestions            
