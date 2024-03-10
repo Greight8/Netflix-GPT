@@ -2,6 +2,12 @@
 
 - create react app
 - configured Tailwind
+- Header (netflix logo)
+- Routinf of app (body.js)
+- Sign Up form
+- Login Form
+- Form validation
+- useRef hook
 
 # Features
 
