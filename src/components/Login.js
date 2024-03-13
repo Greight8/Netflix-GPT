@@ -4,10 +4,14 @@ import Header from './Header'
 import { checkValidateData } from '../utils/validateLogic'
 import { signupValidateData } from '../utils/signupValidateLogic'
 import { useRef } from 'react'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase"
+import { useDispatch } from 'react-redux'
+import { addUser } from '../utils/userSlice'
 
 const Login = () => {
+    console.log("login component")
+
     // 1) making state to change the login / sign up form
     const [isSignInForm, setIsSignInForm] = useState(true);
 
@@ -23,6 +27,9 @@ const Login = () => {
     // 6) useRef hook to get reference of name, confirmPassword
     const name = useRef(null)
     // const confirmPassword = useRef(null)
+
+    // 7) using useDispatch hook to update the store again to fix pour bug
+    const dispatch = useDispatch();
 
     // 1.1) func to change login/Signup form
     const toggleForm = () => {
@@ -42,7 +49,7 @@ const Login = () => {
         signInWithEmailAndPassword(auth, emailText, password.current.value)
             .then((userCredential) => {
                 const user = userCredential.user;
-                console.log(user)
+                // console.log(user)
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -64,7 +71,20 @@ const Login = () => {
             .then((userCredential) => {
                 // Signed up 
                 const user = userCredential.user;
-                console.log(user)
+                // console.log(user)
+
+                updateProfile(user, {
+                    displayName: name.current.value, photoURL: "https://occ-0-3752-3647.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABb-2HamFwKzPuJRxE5pQeGH0W5yeBHpMIiTJEAnVk2Z4V5YPL7H8oYzZAWespUtKFbFaGlE4TeN3AxQell2V03E6_XRmk_8.png?r=d8a"
+
+                }).then(() => {
+                    // b) updating the store again
+                    const { uid, email, displayName, photoURL } = auth.currentUser;
+                    dispatch(addUser({ uid: uid, email: email, name: displayName, photoURL: photoURL }))
+
+                }).catch((error) => {
+                    setErrorMsg(error);
+                });
+
             })
             .catch((error) => {
                 const errorCode = error.code;
