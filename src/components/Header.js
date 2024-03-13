@@ -7,6 +7,8 @@ import { auth } from '../utils/firebase'
 import { addUser, removeUser } from '../utils/userSlice'
 
 const Header = () => {
+    console.log("header component")
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -31,7 +33,7 @@ const Header = () => {
 
     // 1) making our logic to check every time if the user is sign up / logged in or not
     useEffect(() => {
-        console.log("useeffect called after body component")
+        console.log("useeffect called after header component")
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
