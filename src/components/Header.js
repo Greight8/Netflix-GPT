@@ -35,7 +35,7 @@ const Header = () => {
     useEffect(() => {
         console.log("useeffect called after header component")
 
-        onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 // a) User is signed in , we will update our store , userSlice
                 const { uid, email, displayName, photoURL } = user;
@@ -50,6 +50,10 @@ const Header = () => {
                 navigate("/");
             }
         });
+
+        return (() => {
+            return unsubscribe();
+        })
     }, [])
 
     return (
