@@ -4,7 +4,7 @@ import Browse from './Browse'
 import Login from './Login'
 
 const Body = () => {
-    console.log("body component")
+    // console.log("body component")
 
     // 1) making routes
     const appRouter = createBrowserRouter(

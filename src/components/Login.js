@@ -8,9 +8,10 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfi
 import { auth } from "../utils/firebase"
 import { useDispatch } from 'react-redux'
 import { addUser } from '../utils/userSlice'
+import { MyphotoURL } from '../utils/constants'
 
 const Login = () => {
-    console.log("login component")
+    // console.log("login component")
 
     // 1) making state to change the login / sign up form
     const [isSignInForm, setIsSignInForm] = useState(true);
@@ -74,7 +75,7 @@ const Login = () => {
                 // console.log(user)
 
                 updateProfile(user, {
-                    displayName: name.current.value, photoURL: "https://occ-0-3752-3647.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABb-2HamFwKzPuJRxE5pQeGH0W5yeBHpMIiTJEAnVk2Z4V5YPL7H8oYzZAWespUtKFbFaGlE4TeN3AxQell2V03E6_XRmk_8.png?r=d8a"
+                    displayName: name.current.value, photoURL: MyphotoURL
 
                 }).then(() => {
                     // b) updating the store again
