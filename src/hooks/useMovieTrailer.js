@@ -18,7 +18,7 @@ const useMovieTrailer = (movieId) => {
         const movieTrailer = data.results.filter((item) => {
             return item.name === "Official Trailer";
         })
-        console.log("filtered movie trailer data", movieTrailer)
+        // console.log("filtered movie trailer data", movieTrailer)
         dispatch(addTrailerVideo(movieTrailer))
         // SetTrailerId(movieTrailer.key)
     }
