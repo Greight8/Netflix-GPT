@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { auth } from '../utils/firebase'
 import { addUser, removeUser } from '../utils/userSlice'
 import { netflixLogo } from '../utils/constants';
+import { toggleGptSearchView } from '../utils/gptSlice';
 
 const Header = () => {
     // console.log("header component")
@@ -57,12 +58,18 @@ const Header = () => {
         })
     }, [])
 
+    const handleGptSearchClick = () => {
+        // toggle Gpt feature
+        dispatch(toggleGptSearchView())
+    }
+
     return (
         <div className="absolute flex justify-between w-screen px-5 py-3 bg-gradient-to-b from-black z-10">
 
             <img className="w-44 font-bold" src={netflixLogo} alt="netflix logo" />
 
             {myUser && <div className="flex">
+                <button className='text-white bg-purple-800 h-[38px] pl-[12px] pr-[12px] pb-[2px] mt-[18px] mr-[22px] rounded-sm' onClick={handleGptSearchClick}>Gpt Search</button>
                 <img className="h-[37px] mt-[17px] pr-[10px]" src={myUser.photoURL} alt="user icon" />
 
                 <button onClick={handleSignOut} className="font-bold text-gray-300 cursor-pointer">Sign out</button>

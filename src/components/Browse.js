@@ -1,8 +1,10 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import useNowPlayingMovies from '../hooks/useNowPlayingMovies'
 import usePopularMovies from '../hooks/usePopularMovies'
 import useTopRatedMovies from '../hooks/useTopRatedMovies';
 import useUpcomingMovies from '../hooks/useUpcomingMovies';
+import GptSearch from './GptSearch';
 import Header from './Header'
 import MainContainer from './MainContainer';
 import SecondryContainer from './SecondryContainer';
@@ -14,14 +16,23 @@ const Browse = () => {
     useNowPlayingMovies();
     usePopularMovies();
     useTopRatedMovies();
-    useUpcomingMovies()
+    useUpcomingMovies();
+
+    // 2) subscribing to our gpt store to show, wether to show gptSearch component or not
+    const myGpt = useSelector((store) => {
+        return store.gpt.gptSearch
+    })
 
 
     return (
         <div>
             <Header />
-            <MainContainer />
-            <SecondryContainer />
+            {myGpt ? <GptSearch /> :
+                <>
+                    <MainContainer />
+                    <SecondryContainer />
+                </>}
+
         </div>
     )
 }
