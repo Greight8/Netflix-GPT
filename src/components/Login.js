@@ -8,7 +8,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfi
 import { auth } from "../utils/firebase"
 import { useDispatch } from 'react-redux'
 import { addUser } from '../utils/userSlice'
-import { MyphotoURL } from '../utils/constants'
+import { Background_Img, MyphotoURL } from '../utils/constants'
 
 const Login = () => {
     // console.log("login component")
@@ -99,7 +99,7 @@ const Login = () => {
             <Header />
 
             <div className='absolute'>
-                <img src="https://assets.nflxext.com/ffe/siteui/vlv3/93da5c27-be66-427c-8b72-5cb39d275279/94eb5ad7-10d8-4cca-bf45-ac52e0a052c0/IN-en-20240226-popsignuptwoweeks-perspective_alpha_website_medium.jpg" alt="background image on netflix login page" />
+                <img src={Background_Img} alt="background image on netflix login page" />
             </div>
 
             <form onSubmit={(e) => { return e.preventDefault() }} className='w-4/12 my-36 p-12 mx-auto left-0 right-0 text-white absolute bg-black rounded-sm bg-opacity-80'>

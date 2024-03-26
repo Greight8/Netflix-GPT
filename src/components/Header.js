@@ -69,7 +69,7 @@ const Header = () => {
             <img className="w-44 font-bold" src={netflixLogo} alt="netflix logo" />
 
             {myUser && <div className="flex">
-                <button className='text-white bg-purple-800 h-[38px] pl-[12px] pr-[12px] pb-[2px] mt-[18px] mr-[22px] rounded-sm' onClick={handleGptSearchClick}>Gpt Search</button>
+                <button className='text-white bg-purple-800 h-[38px] pl-[12px] pr-[12px] pb-[2px] mt-[18px] mr-[22px] rounded-sm' onClick={handleGptSearchClick}>GPT search</button>
                 <img className="h-[37px] mt-[17px] pr-[10px]" src={myUser.photoURL} alt="user icon" />
 
                 <button onClick={handleSignOut} className="font-bold text-gray-300 cursor-pointer">Sign out</button>
