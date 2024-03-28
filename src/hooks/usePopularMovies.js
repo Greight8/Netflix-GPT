@@ -10,7 +10,7 @@ const usePopularMovies = () => {
         const url = 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1'
         const response = await fetch(url, API_OPTIONS)
         const data = await response.json()
-        console.log("popular movies", data)
+        // console.log("popular movies", data)
 
         dispatch(addPopularMovies(data.results))
     }

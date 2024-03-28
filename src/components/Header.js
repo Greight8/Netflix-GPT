@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { auth } from '../utils/firebase'
 import { addUser, removeUser } from '../utils/userSlice'
-import { netflixLogo } from '../utils/constants';
+import { netflixLogo, SUPPORTED_LANGUAGES } from '../utils/constants';
 import { toggleGptSearchView } from '../utils/gptSlice';
+import { changeLanguage } from '../utils/configSlice';
 
 const Header = () => {
     // console.log("header component")
@@ -20,7 +21,6 @@ const Header = () => {
     })
 
     // 2) func. to sign out
-
     const handleSignOut = () => {
         signOut(auth).then(() => {
             // a) Sign-out successful.
@@ -58,10 +58,23 @@ const Header = () => {
         })
     }, [])
 
+
+    //4) func to go gptSearchPage 
     const handleGptSearchClick = () => {
         // toggle Gpt feature
         dispatch(toggleGptSearchView())
     }
+
+    // 5) func to change the language 
+    const handleChangeLanguage = (e) => {
+        // console.log(e.target.value)
+        dispatch(changeLanguage(e.target.value))
+    }
+
+    // 6) subscribing to our gpt store only show the language change button when we are rendering gptSearchPage :-
+    const myGpt = useSelector((store) => {
+        return store.gpt.gptSearch
+    })
 
     return (
         <div className="absolute flex justify-between w-screen px-5 py-3 bg-gradient-to-b from-black z-10">
@@ -69,7 +82,22 @@ const Header = () => {
             <img className="w-44 font-bold" src={netflixLogo} alt="netflix logo" />
 
             {myUser && <div className="flex">
-                <button className='text-white bg-purple-800 h-[38px] pl-[12px] pr-[12px] pb-[2px] mt-[18px] mr-[22px] rounded-sm' onClick={handleGptSearchClick}>GPT search</button>
+
+                {myGpt && <select className='px-[10px] h-[39px] mt-[17px] mr-[24px] bg-gray-900 text-white' onChange={handleChangeLanguage}>
+                    {/* 1) value should be same as inside language constants */}
+                    {/* <option value={"en"}>English</option>
+                    <option value={"hindi"}>हिंदी</option>
+                    <option value={"spanish"}>española</option> */}
+
+                    {/* 2) getting the values from constants file */}
+                    {SUPPORTED_LANGUAGES.map((lang) => {
+                        return <option key={lang.identifier} value={lang.identifier}>{lang.name}</option>
+                    })}
+
+                </select>}
+
+                <button className='text-white bg-purple-800 h-[38px] pl-[12px] pr-[12px] pb-[2px] mt-[18px] mr-[22px] rounded-sm' onClick={handleGptSearchClick}>{!myGpt ? "GPT search" : "Home"}</button>
+
                 <img className="h-[37px] mt-[17px] pr-[10px]" src={myUser.photoURL} alt="user icon" />
 
                 <button onClick={handleSignOut} className="font-bold text-gray-300 cursor-pointer">Sign out</button>
