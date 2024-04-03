@@ -120,7 +120,7 @@ const Login = () => {
 
                 <p className='text-yellow-400 text-bold text-sm mx-4'>{errorMsg}</p>
 
-                {isSignInForm && <button className='mx-4 mt-7 py-2 bg-red-700 w-[275px]' onClick={handleValidate}>Sign In</button>}
+                {isSignInForm && <button className='mx-4 mt-7 py-2 bg-red-700 w-[275px]' onClick={handleValidate}>Log In</button>}
 
                 {!isSignInForm && <button className='mx-4 mt-7 py-2 bg-red-700 w-[275px]' onClick={handleValidate2}>Sign up</button>}
 

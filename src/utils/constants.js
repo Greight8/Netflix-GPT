@@ -20,3 +20,8 @@ export const SUPPORTED_LANGUAGES = [
     { name: "हिंदी", identifier: "hindi" },
     { name: "española", identifier: "spanish" }
 ]
+
+// export const OPENAI_KEY = "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"
+// export const OPENAI_KEY = "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"
+// export const OPENAI_KEY = "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"
+export const OPENAI_KEY = "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"
