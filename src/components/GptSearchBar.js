@@ -1,13 +1,12 @@
 import React from 'react'
 import { useRef } from 'react'
 import { useSelector } from 'react-redux'
-import useHandleGptSearchClick from '../hooks/useHandleGptSearchClick'
 import { API_OPTIONS } from '../utils/constants';
 import { useDispatch } from 'react-redux';
-
 import language from '../utils/languageConstants'
 import { addGpthMovieResult } from '../utils/gptSlice';
 import openai from '../utils/openai';
+// import useHandleGptSearchClick from '../hooks/useHandleGptSearchClick'
 
 const GptSearchBar = () => {
     const dispatch = useDispatch();
@@ -58,10 +57,10 @@ const GptSearchBar = () => {
         const myPromises = gptMovies.map((movies) => {
             return searchMoviesTmdb(movies)
         })
-        console.log(myPromises)
+        // console.log(myPromises)
 
         const tmdbSearchResult = await Promise.allSettled(myPromises);
-        console.log(tmdbSearchResult)
+        // console.log(tmdbSearchResult)
 
         dispatch(addGpthMovieResult({ movieNames: gptMovies, movieResults: tmdbSearchResult }));
     }
