@@ -8,6 +8,7 @@ import { addUser, removeUser } from '../utils/userSlice'
 import { netflixLogo, SUPPORTED_LANGUAGES } from '../utils/constants';
 import { toggleGptSearchView } from '../utils/gptSlice';
 import { changeLanguage } from '../utils/configSlice';
+import language from '../utils/languageConstants';
 
 const Header = () => {
     // console.log("header component")
@@ -76,14 +77,19 @@ const Header = () => {
         return store.gpt.gptSearch
     })
 
+    // 1) subscribing to config store
+    const myLang = useSelector((store) => {
+        return store.config.lang
+    })
+
     return (
-        <div className="absolute flex justify-between w-screen px-5 py-3 bg-gradient-to-b from-black z-10">
+        <div className="absolute flex justify-between w-[100%] overflow-x-hidden overflow-y-hidden px-5 py-3 bg-gradient-to-b from-black z-10">
 
             <img className="w-44 font-bold" src={netflixLogo} alt="netflix logo" />
 
             {myUser && <div className="flex">
 
-                {myGpt && <select className='px-[10px] h-[39px] mt-[17px] mr-[24px] bg-gray-900 text-white' onChange={handleChangeLanguage}>
+                <select className='px-[10px] h-[39px] mt-[17px] mr-[24px] bg-gray-900 text-white' onChange={handleChangeLanguage}>
                     {/* 1) value should be same as inside language constants */}
                     {/* <option value={"en"}>English</option>
                     <option value={"hindi"}>हिंदी</option>
@@ -94,13 +100,13 @@ const Header = () => {
                         return <option key={lang.identifier} value={lang.identifier}>{lang.name}</option>
                     })}
 
-                </select>}
+                </select>
 
-                <button className='text-white bg-purple-800 h-[38px] pl-[12px] pr-[12px] pb-[2px] mt-[18px] mr-[22px] rounded-sm' onClick={handleGptSearchClick}>{!myGpt ? "GPT search" : "Home"}</button>
+                <button className='text-white bg-purple-800 h-[38px] pl-[12px] pr-[12px] pb-[2px] mt-[18px] mr-[22px] rounded-sm' onClick={handleGptSearchClick}>{!myGpt ? language[myLang].gptSearch : language[myLang].home}</button>
 
                 <img className="h-[37px] mt-[17px] pr-[10px]" src={myUser.photoURL} alt="user icon" />
 
-                <button onClick={handleSignOut} className="font-bold text-gray-300 cursor-pointer">Sign out</button>
+                <button onClick={handleSignOut} className="font-bold text-gray-300 cursor-pointer">{language[myLang].signOut}</button>
             </div>}
         </div>
     )

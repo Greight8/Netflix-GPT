@@ -4,6 +4,7 @@ import VideoBackground from './VideoBackground'
 import VideoTitle from './VideoTitle'
 
 const MainContainer = () => {
+    // 1) subscribing movieSlice to get nowPlayingMovies
     const movies = useSelector((store) => {
         return store.movies.nowPlayingMovies
     })
