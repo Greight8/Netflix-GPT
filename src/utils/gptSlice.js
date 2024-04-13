@@ -17,11 +17,16 @@ const gptSlice = createSlice(
                 const { movieNames, movieResults } = action.payload
                 state.searchMovies = movieNames
                 state.tmdbSearchMovies = movieResults
+            },
+
+            clearCart: (state, action) => {
+                state.searchMovies = action.payload
+                state.tmdbSearchMovies = action.payload
             }
         }
     }
 )
 
-export const { toggleGptSearchView, addGpthMovieResult } = gptSlice.actions
+export const { toggleGptSearchView, addGpthMovieResult, clearCart } = gptSlice.actions
 
 export default gptSlice.reducer

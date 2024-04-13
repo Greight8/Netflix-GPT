@@ -98,7 +98,7 @@ const Login = () => {
         <div>
             <Header />
 
-            <div className='absolute'>
+            <div className='absolute w-[100%] h-[100%] overflow-x-hidden overflow-y-hidden'>
                 <img src={Background_Img} alt="background image on netflix login page" />
             </div>
 

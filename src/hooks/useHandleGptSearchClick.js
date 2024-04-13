@@ -1,13 +1,12 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { API_OPTIONS } from '../utils/constants';
 import { addGpthMovieResult } from '../utils/gptSlice';
 import openai from '../utils/openai';
 
-const useHandleGptSearchClick = async () => {
+const useHandleGptSearchClick = async (searchText, myFlag) => {
     // console.log("value of input box is", searchText.current.value);
     const dispatch = useDispatch();
-
-    const moviList = useSelector(() => { })
 
     const tmdbSearchMovies = async (movies) => {
         const url = 'https://api.themoviedb.org/3/search/movie?query=' + movies + '&include_adult=false&language=en-US&page=1'
@@ -17,7 +16,7 @@ const useHandleGptSearchClick = async () => {
         return data.results
     }
 
-    const handleGptSearchClick = async (searchText) => {
+    const handleGptSearchClick = async () => {
         const gptQuery = "Act as a movie recomendation system and suggest some movies for the query : " + searchText.current.value + ".Only give me names of 5 movies, comma seperated like the example result given ahead. Example reselt : Sholay, Don3, Pathan. aazigar, Koi Mil Gya"
 
         const GptResult = await openai.chat.completions.create({
@@ -45,6 +44,12 @@ const useHandleGptSearchClick = async () => {
 
         dispatch(addGpthMovieResult({ movieNames: gptMovies, movieResults: tmdbSearchResult }));
     }
+
+    useEffect(() => {
+        if (myFlag) {
+            handleGptSearchClick()
+        }
+    })
 
 }
 

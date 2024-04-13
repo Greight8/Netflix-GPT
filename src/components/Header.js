@@ -11,7 +11,7 @@ import { changeLanguage } from '../utils/configSlice';
 import language from '../utils/languageConstants';
 
 const Header = () => {
-    // console.log("header component")
+    console.log("header component")
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -36,7 +36,7 @@ const Header = () => {
 
     // 1) making our logic to check every time if the user is sign up / logged in or not
     useEffect(() => {
-        // console.log("useeffect called after header component")
+        console.log("useeffect called after header component is rendered")
 
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -83,9 +83,9 @@ const Header = () => {
     })
 
     return (
-        <div className="absolute flex justify-between w-[100%] overflow-x-hidden overflow-y-hidden px-5 py-3 bg-gradient-to-b from-black z-10">
+        <div className="fixed flex justify-between w-[100%] overflow-x-hidden overflow-y-hidden px-5 py-3 bg-gradient-to-b from-black z-10 flex-col just md:flex-row">
 
-            <img className="w-44 font-bold" src={netflixLogo} alt="netflix logo" />
+            <img className="w-44 font-bold mx-auto md:mx-0" src={netflixLogo} alt="netflix logo" />
 
             {myUser && <div className="flex">
 

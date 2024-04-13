@@ -30,7 +30,7 @@ const GptSearchBar = () => {
         const url = 'https://api.themoviedb.org/3/search/movie?query=' + movies + '&include_adult=false&language=en-US&page=1'
         const response = await fetch(url, API_OPTIONS)
         const data = await response.json();
-        console.log(data)
+        // console.log(data)
         return data.results
     }
 
@@ -68,11 +68,11 @@ const GptSearchBar = () => {
 
     return (
         <div className='flex justify-center pt-[160px]'>
-            <div className=' bg-black'>
+            <div className='bg-black w-[376px] mt-[30px] ml-[-23px] md:bg-black'>
                 <form onSubmit={handleClick}>
-                    <input ref={searchText} className='pl-[15px] w-[451px] ml-[10px] py-2 text-black' type="text" placeholder={language[myLang].placeholder} />
+                    <input ref={searchText} className='w-[278px] ml-[8px] md:w-[451px] md:ml-[10px] pl-[15px] py-2 text-black' type="text" placeholder={language[myLang].placeholder} />
 
-                    <button className='bg-red-700 w-[130px] py-2 ml-[20px] mr-[10px] my-2 rounded-md text-white text-bold' onClick={handleGptSearchClick}>{language[myLang].search}</button>
+                    <button className='w-[73px] mr-[-2px] ml-[10px] bg-red-700  md:bg-red-700 md:w-[155px] md:py-2 md:ml-[20px] md:mr-[10px] md:my-2 rounded-md text-white text-bold' onClick={handleGptSearchClick}>{language[myLang].search}</button>
                 </form>
             </div>
         </div>
